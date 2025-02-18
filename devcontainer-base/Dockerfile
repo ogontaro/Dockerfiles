@@ -18,11 +18,10 @@ COPY --from=docker-cli /usr/local/bin/docker-compose /usr/local/bin/docker-compo
 RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin && chmod +x /usr/local/bin/task
 
 COPY init-scripts/*.sh /opt/armyknife/init/
+RUN curl -sS https://starship.rs/install.sh | sh -s -- --yes
 
 USER knife
 RUN git clone --quiet --depth 1 https://github.com/asdf-vm/asdf.git ~/.asdf \
   && mkdir -p ~/.config/fish/completions \
   && echo "source ~/.asdf/asdf.fish" >> ~/.config/fish/config.fish \
   && ln -s ~/.asdf/completions/asdf.fish ~/.config/fish/completions
-
-RUN curl -sS https://starship.rs/install.sh | sh -s -- --yes
