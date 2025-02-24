@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: set-images
     strategy:
-      # 並列実行のジョブが一つでも失敗しても、他のジョブをキャンセルしないように
+      # 並列実行のジョブが一つ失敗すると、他のジョブをキャンセルする設定を無効にしました
       fail-fast: false
       matrix:
         dir: ${{ fromJson(needs.set-images.outputs.dir) }}
