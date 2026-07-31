@@ -13,7 +13,7 @@ jobs:
     outputs:
       dir: ${{ steps.set-images.outputs.dir }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: set-images
         id: set-images
         run: |
@@ -28,7 +28,7 @@ jobs:
       matrix:
         dir: ${{ fromJson(needs.set-images.outputs.dir) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
