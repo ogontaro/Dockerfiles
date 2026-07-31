@@ -12,7 +12,9 @@ RUN buildDeps="gnupg2 software-properties-common python3-pip python3-venv" && \
   fi && \
   curl -L "https://github.com/mikefarah/yq/releases/latest/download/yq_linux_${ARCH}" -o /usr/local/bin/yq && \
   chmod +x /usr/local/bin/yq && \
-  pip3 install --no-cache-dir pipx && \
+  # apt版pipx(Ubuntu 24.04時点で1.4.3)は`install --global`に未対応のため、pipxはpipで最新版を入れる。
+  # ベースイメージがPython 3.12(PEP 668 externally-managed-environment)になったため--break-system-packagesが必要。
+  pip3 install --no-cache-dir --break-system-packages pipx && \
   pipx ensurepath && \
   pipx install --global copier && \
   SUDO_FORCE_REMOVE=yes apt purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $buildDeps && \
