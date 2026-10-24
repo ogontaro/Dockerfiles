@@ -32,7 +32,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
       # fix qemu: uncaught target signal 11
       # https://github.com/docker/buildx/issues/1170#issuecomment-1159350550
       - name: Reset QEMU
